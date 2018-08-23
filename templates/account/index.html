@@ -5,9 +5,9 @@
     <title>SOMETHING</title>
 </head>
 <body>
-    {% if list %}
+{% if event_list %}
     <ul>
-    {% for event in list %}
+    {% for event in event_list %}
         <li><a href="/account/event/{{ event.id }}/">{{ event.title }}</a></li>
     {% endfor %}
     </ul>
