@@ -1,27 +1,23 @@
 from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
-from .models import Person, Event
+from .models import Person
 
 def index(request):
-    event_list= Event.objects.all()
+    person_list= Person.objects.all()
     template = loader.get_template('account/index.html')
     context = {
-        'event_list': event_list,
+        'person_list': person_list,
 
     }
     return HttpResponse(template.render(context, request))
 
 def user(request, user_id):
-    return HttpResponse(Person.objects.get(id=user_id))
-
-def event(request, event_id):
-    event = Event.objects.get(id=event_id)
-    user_list = event.members.all()
-    template = loader.get_template('account/event.html')
+    person = Person.objects.get(id=user_id)
+    template = loader.get_template('account/user.html')
     context = {
-        'event_title': Event.objects.get(id=event_id),
-        'user_list': user_list
+        'user_name': person,
+        'event_list': person.events.all()
     }
     return HttpResponse(template.render(context, request))
 

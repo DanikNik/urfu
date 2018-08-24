@@ -1,0 +1,16 @@
+{%extends "base_generic.html"%}
+
+{%block title%} User {%endblock title%}
+
+{%block content%}
+<h1>{{user_name}}</h1>
+{% if event_list %}
+    <ul>
+    {% for event in event_list %}
+        <li><a href="/events/{{event.id}}">{{ event.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
+{%endblock content%}

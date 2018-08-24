@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>EVENT {{event_title}}</title>
-</head>
-<body>
+{%extends "base_generic.html"%}
+
+{%block title%} Event {%endblock title%}
+
+{%block content%}
+<h1>{{event_title}}</h1>
 {% if user_list %}
     <ul>
         {% for user in user_list%}
@@ -14,5 +13,5 @@
     {%else%}
         <p>No users</p>
 {%endif%}
-</body>
-</html>
+
+{%endblock content%}

@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SOMETHING</title>
-</head>
-<body>
-{% if event_list %}
+{%extends "base_generic.html"%}
+
+{%block title%} User {%endblock title%}
+
+{%block content%}
+{% if person_list %}
     <ul>
-    {% for event in event_list %}
-        <li><a href="/account/event/{{ event.id }}/">{{ event.title }}</a></li>
+    {% for person in person_list %}
+        <li><a href="/account/{{person.id}}">{{ person.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No polls are available.</p>
+    <p>No people are available.</p>
 {% endif %}
-</body>
-</html>
+{%endblock content%}

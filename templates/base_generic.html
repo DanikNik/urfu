@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static%}
+    <link rel="stylesheet" href="{%static "generic.css"%}"/>
+    <title>{% block title %}URFU{% endblock %}</title>
+</head>
+
+<body>
+    <div id="sidebar" class="sidenav">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/account/">Personal</a></li>
+            <li><a href="/events/">Events</a></li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content" class="main">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
