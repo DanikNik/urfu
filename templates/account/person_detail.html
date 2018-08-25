@@ -3,10 +3,17 @@
 {%block title%} User {%endblock title%}
 
 {%block content%}
-<h1>{{user_name}}</h1>
-{% if event_list %}
+<h1>{{person.name}} {{person.surname}}</h1>
+
+{%if person.user_id == request.user.id%}
+    <h3>IT'S YOU</h3>
+{%endif%}
+
+<p>{{person.type}}</p>
+
+{% if person.events %}
     <ul>
-    {% for event in event_list %}
+    {% for event in person.events.all %}
         <li><a href="/events/{{event.id}}">{{ event.title }}</a></li>
     {% endfor %}
     </ul>

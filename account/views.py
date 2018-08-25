@@ -1,24 +1,18 @@
 from django.shortcuts import render
 from django.template import loader
+from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 from .models import Person
 
-def index(request):
-    person_list= Person.objects.all()
-    template = loader.get_template('account/index.html')
-    context = {
-        'person_list': person_list,
-
-    }
-    return HttpResponse(template.render(context, request))
-
-def user(request, user_id):
-    person = Person.objects.get(id=user_id)
-    template = loader.get_template('account/user.html')
-    context = {
-        'user_name': person,
-        'event_list': person.events.all()
-    }
-    return HttpResponse(template.render(context, request))
+class PersonListView(ListView):
+    model = Person
+    template_name = 'account/person_list.html'
+    context_object_name = 'person_list'
 
 # Create your views here.
+
+
+class PersonDetailView(DetailView):
+    model = Person
+    template_name = 'account/person_detail.html'
+    context_object_name = 'person'

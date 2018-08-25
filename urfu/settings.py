@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
-    'event.apps.EventConfig'
+    'event.apps.EventConfig',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +125,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "catalog/static"),
     '/var/www/static/',
 ]
+
+
+LOGIN_URL = '/auth/login'
+LOGIN_REDIRECT_URL='/events/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
