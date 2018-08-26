@@ -39,7 +39,6 @@ class NewPersonView(FormView):
 
 
 class RegisterFormView(FormView):
-    #TODO: запилить привязку персоны к пользователю
     form_class = UserCreationForm
 
     template_name = "registration/register.html"

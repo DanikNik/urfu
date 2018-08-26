@@ -4,6 +4,7 @@
 
 {%block content%}
 <h1>{{person.name}} {{person.surname}}</h1>
+<a>USER_ID: {{person.user.id}}</a>
 
 {%if person.user_id == request.user.id%}
     <h3>IT'S YOU</h3>
