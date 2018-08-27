@@ -19,3 +19,9 @@ class Membership(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.person) + ' / ' + str(self.event)
+
+    def add_member(self, _person, _event):
+        membership = self.create(person=_person, event=_event)
+        return membership

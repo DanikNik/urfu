@@ -1,13 +1,23 @@
-from django.shortcuts import render
-from django.views.generic import ListView
 from django.template import loader
 from django.http import HttpResponse
 from .models import Event
 from django.contrib.auth.decorators import login_required
-
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin
 # Create your views here.
 
 #TODO: перевести все views на class-based
+
+class EventListView(ListView):
+    model = Event
+    template_name = 'event/event_list.html'
+    context_object_name = "event_list"
+
+class EventDetailView(FormMixin, DetailView):
+    success_url = event
+    pass
+
+
 
 @login_required
 def index(request):

@@ -15,13 +15,13 @@ from django.contrib.auth.models import User
 class NewPersonForm(ModelForm):
     class Meta:
         model = Person
-        exclude =('user',)
+        exclude =('user', 'events')
 
 class NewPersonView(FormView):
     template_name = 'registration/person_create.html'
 
     def __init__(self):
-        self.user_id=0
+        self.user_id = 0
 
     form_class = NewPersonForm
     success_url = '/account/'
@@ -33,8 +33,8 @@ class NewPersonView(FormView):
         return super(NewPersonView, self).form_valid(form)
 
     def get(self, request, user_id):
-        self.user_id=user_id
-        template =loader.get_template(self.template_name)
+        self.user_id = user_id
+        template = loader.get_template(self.template_name)
         return HttpResponse(template.render({'user_id': user_id, 'form': NewPersonForm()}, request))
 
 
@@ -63,5 +63,5 @@ class LoginFormView(FormView):
         self.user = form.get_user()
 
         login(self.request, self.user)
-        # success_url = '/account/'+str(self.user.id)
+        self.success_url = '/account/'+str(self.user.id)
         return super(LoginFormView, self).form_valid(form)
