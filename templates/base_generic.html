@@ -2,31 +2,34 @@
 <html lang="en">
 <head>
     {%load static%}
-    <link rel="stylesheet" href="{%static "generic.css"%}"/>
+    <link rel="stylesheet" href="{%static "css/materialize.css"%}"/>
+
     <title>{% block title %}URFU{% endblock %}</title>
 </head>
 
 <body>
-    <div id="sidebar" class="sidenav">
-        {% block sidebar %}
-        <ul>
-            <!--<li><a href="/">Home</a></li>-->
+
+    <nav>
+        <div class="nav-wrapper">
             {% if user.is_authenticated %}
-            <h1><a>User: {{ user.get_username }}</a></h1>
-                <li><a href="{% url 'logout'%}">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'login'%}">Login</a></li>
+                <a>User: {{ user.get_username }}</a>
             {% endif %}
-            <li><a href="/auth/register">Register</a> </li>
-            <li><a href="/account/">Personal</a></li>
-            <li><a href="/events/">Events</a></li>
+            <ul id="nav-mobile" class="right">
+                <li><a href="/auth/register">Register</a></li>
+                <li><a href="/account/">Personal</a></li>
+                <li><a href="/events/">Events</a></li>
+                {% if user.is_authenticated %}
+                    <li><a class="waves-effect waves-light btn" href="{% url 'logout'%}">Logout</a></li>
+                {% else %}
+                    <li><a class="waves-effect waves-light btn" href="{% url 'login'%}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
 
-        </ul>
-        {% endblock %}
-    </div>
-
-    <div id="content" class="main">
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
+<script type="text/javascript" src="{%static "js/materialize.js"%}"></script>   
 </body>
 </html>
