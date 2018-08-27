@@ -3,15 +3,24 @@
 {%block title%} Event {%endblock title%}
 
 {%block content%}
-<h1>{{event_title}}</h1>
-{% if user_list %}
+<h1>{{even.title}}</h1>
+{% if event.members %}
     <ul>
-        {% for user in user_list%}
+        {% for user in event.members.all%}
             <li><a href="/account/{{user.id}}">{{user.name}} {{user.surname}}</a></li>
         {% endfor %}
     </ul>
     {%else%}
         <p>No users</p>
+{%endif%}
+
+{%if request.user.person in event.members%}
+<p>YOU ARE REGISTERED</p>
+{%else%}
+<form action="" method="POST">
+    {%csrf_token%}
+    <button type="submit">REGISTER</button>
+</form>
 {%endif%}
 
 {%endblock content%}
