@@ -16,7 +16,7 @@
                     <li><a href="{%url 'register'%}">Register</a></li>
                     <li><a href="{%url 'person_list'%}">Personal</a></li>
                     <li><a href="{%url 'project_list'%}">Projects</a></li>
-                    <li><a href="{{request.user.person.get_absolute_url}}">{{request.user.person.name}}</a></li>
+                    <li><a href="{{request.user.person.get_absolute_url}}">{{request.user.person}} UserID:{{request.user.id}}</a></li>
                     <li><a class="waves-effect waves-light btn" href="{% url 'logout'%}">Logout</a></li>
                 </ul>
             {%else%}
