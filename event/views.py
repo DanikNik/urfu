@@ -39,6 +39,7 @@ class ProjectDetailView(DetailView, FormMixin):
     def form_valid(self, form):
         project_membership = ProjectMembership.add_member(self.request.user.person, self.object)
         for event in self.object.event_set.all():
+            print(event.is_required)
             if event.is_required:
                 event_membership = EventMembership.add_member(self.request.user.person, event)
                 event_membership.save()

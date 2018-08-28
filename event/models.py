@@ -29,16 +29,17 @@ class Event(models.Model):
     description = models.TextField(null=True, blank=True)
     start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
-    is_required = models.BooleanField(null=True, blank=True)
+    is_required = models.BooleanField(default=0)
 
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='owned_events')
+    members = models.ManyToManyField(Person, through='EventMembership')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["title"]
 
     def __str__(self):
-        return self.title
+        return self.title + ' ' + '({})'.format('reqired' if self.is_required else 'not required')
 
     def get_absolute_url(self):
         return reverse('event_detail', args=[self.id])

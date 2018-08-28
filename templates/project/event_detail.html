@@ -8,7 +8,7 @@
 {% if event.project.members %}
     <h4>Members</h4>
     <ul>
-        {% for person in event.project.members.all%}
+        {% for person in event.members.all%}
             <li><a href="{{person.get_absolute_url}}">{{person.name}} {{person.surname}}</a></li>
         {% endfor %}
     </ul>
@@ -18,11 +18,11 @@
 
 {%if event.is_required%}
     {% if request.user.person in event.project.members.all%}
-        <p>You are registered</p>
+        <h5>You are registered</h5>
     {%endif%}
 {%else%}
-    {%if request.user.person in project.members.all%}
-        <p>You are registered</p>
+    {%if request.user.person in event.members.all%}
+        <h5>You are registered</h2>
     {%else%}
     <form action="" method="POST">
         {%csrf_token%}

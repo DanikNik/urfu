@@ -16,6 +16,11 @@
     <ul>
     {% for project in person.projects.all %}
         <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
+        <ul>
+            {%for event in project.event_set.all%}
+            <li>-><a href="{{event.get_absolute_url}}">{{event}}</a></li>
+            {%endfor%}
+        </ul>
     {% endfor %}
     </ul>
 {% else %}

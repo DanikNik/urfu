@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 class NewPersonForm(ModelForm):
     class Meta:
         model = Person
-        exclude =('user', 'events')
+        exclude =('user', 'projects')
 
 class NewPersonView(FormView):
     template_name = 'registration/person_create.html'

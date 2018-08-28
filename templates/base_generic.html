@@ -13,10 +13,10 @@
             {%block sidebar%}
             {%if user.is_authenticated%}
                 <ul id="nav-mobile" class="right">
-                    <li><a href="/auth/register">Register</a></li>
-                    <li><a href="/account/">Personal</a></li>
-                    <li><a href="/projects/">Projects</a></li>
-                    <li><a>User: {{ user.get_username }}</a></li>
+                    <li><a href="{%url 'register'%}">Register</a></li>
+                    <li><a href="{%url 'person_list'%}">Personal</a></li>
+                    <li><a href="{%url 'project_list'%}">Projects</a></li>
+                    <li><a href="{{request.user.person.get_absolute_url}}">{{request.user.person.name}}</a></li>
                     <li><a class="waves-effect waves-light btn" href="{% url 'logout'%}">Logout</a></li>
                 </ul>
             {%else%}
