@@ -1,7 +1,5 @@
 from django.urls import reverse
-from django.http import HttpResponse
 from .models import Project, Event, ProjectMembership, EventMembership
-from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 from django import forms
