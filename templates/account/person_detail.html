@@ -12,13 +12,13 @@
 
 <p>{{person.type}}</p>
 
-{% if person.events %}
+{% if person.projects %}
     <ul>
-    {% for event in person.events.all %}
-        <li><a href="/events/{{event.id}}">{{ event.title }}</a></li>
+    {% for project in person.projects.all %}
+        <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>No events are available.</p>
+    <p>No projects are available.</p>
 {% endif %}
 {%endblock content%}

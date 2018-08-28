@@ -8,7 +8,7 @@
 {% if person_list %}
     <ul>
     {% for person in person_list %}
-        <li><a href="/account/{{person.id}}">{{ person.name }}</a> (user_id: {{person.user.id}})</li>
+        <li><a href="{{person.get_absolute_url}}">{{ person.name }} {{person.surname}}</a> (user_id: {{person.user.id}})</li>
     {% endfor %}
     </ul>
 {% else %}

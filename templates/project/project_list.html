@@ -1,0 +1,17 @@
+{%extends "base_generic.html"%}
+
+{%block title%} Event {%endblock title%}
+
+{%block content%}
+{% if project_list %}
+    <ul>
+    {% for project in project_list %}
+        {%if project.is_visible%}
+        <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
+        {%endif%}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No projects are available.</p>
+{% endif %}
+{%endblock content%}

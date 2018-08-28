@@ -35,7 +35,7 @@ class NewPersonView(FormView):
     def get(self, request, user_id):
         self.user_id = user_id
         template = loader.get_template(self.template_name)
-        return HttpResponse(template.render({'user_id': user_id, 'form': NewPersonForm()}, request))
+        return HttpResponse(template.render({'user_id': user_id, 'form': NewPersonForm()}, request, ))
 
 
 class RegisterFormView(FormView):
