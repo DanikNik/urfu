@@ -3,14 +3,24 @@
 {%block title%} User {%endblock title%}
 
 {%block content%}
-<h1>{{person.name}} {{person.surname}}</h1>
-<a>USER_ID: {{person.user.id}}</a>
-
 {%if person.user_id == request.user.id%}
     <h3>IT'S YOU</h3>
 {%endif%}
+<h1>{{person.name}} {{person.surname}}</h1>
+<p>USER_ID: {{person.user.id}}</p>
+<p>{{person.user.email}}</p>
 
 <p>{{person.type}}</p>
+{%if person.place_of_study%}<p>Place of study: {{person.place_of_study}}</p>{%endif%}
+{%if person.group%}<p>Group_number{{person.group_number}}</p>{%endif%}
+{%if person.place_of_work%}<p>{{person.place_of_work}}</p>{%endif%}
+{%if person.job_position%}<p>{{person.job_position}}</p>{%endif%}
+{%if person.birth_date%}<p>{{person.birth_date}}</p>{%endif%}
+{%if person.vk_link%}<p>{{person.vk_link}}</p>{%endif%}
+{%if person.fb_link%}<p>{{person.fb_link}}</p>{%endif%}
+{%if person.google.link%}<p>{{person.google_link}}</p>{%endif%}
+{%if person.tg_link%}<p>{{person.tg_link}}</p>{%endif%}
+{%if person.phone_number%}<p>{{person.phone_number}}</p>{%endif%}
 
 {% if person.projects %}
     <ul>
