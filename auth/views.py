@@ -52,16 +52,16 @@ class RegisterFormView(FormView):
 
 # Create your views here.
 
-
-class LoginFormView(FormView):
-# TODO: запилить кастомный логин, чтобы редиректило в личный кабинет
-    form_class = AuthenticationForm
-
-    template_name = "registration/login.html"
-    success_url = '/events'
-    def form_valid(self, form):
-        self.user = form.get_user()
-
-        login(self.request, self.user)
-        self.success_url = '/account/'+str(self.user.id)
-        return super(LoginFormView, self).form_valid(form)
+#
+# class LoginFormView(FormView):
+# # TODO: запилить кастомный логин, чтобы редиректило в личный кабинет
+#     form_class = AuthenticationForm
+#
+#     template_name = "registration/login.html"
+#     success_url = '/events'
+#     def form_valid(self, form):
+#         self.user = form.get_user()
+#
+#         login(self.request, self.user)
+#         self.success_url = '/account/'+str(self.user.id)
+#         return super(LoginFormView, self).form_valid(form)

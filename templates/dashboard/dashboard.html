@@ -8,7 +8,9 @@
         <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
         <ul>
             {%for event in project.event_set.all%}
+            {%if request.user.person in event.members.all%}
             <li>-><a href="{{event.get_absolute_url}}">{{event}}</a></li>
+            {%endif%}
             {%endfor%}
         </ul>
     {% endfor %}
