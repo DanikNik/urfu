@@ -14,7 +14,7 @@ class EventListView(ListView):
     context_object_name = "event_list"
 
 class EventDetailView(FormMixin, DetailView):
-    success_url = event
+    # success_url = event
     pass
 
 
