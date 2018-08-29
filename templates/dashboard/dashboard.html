@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block title %} Dashboard {% endblock %}
+{% block content %}
+    <p>Dashboard for {{ request.user.person }}</p>
+    {% if request.user.person.projects %}
+    <ul>
+    {% for project in request.user.person.projects.all %}
+        <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
+        <ul>
+            {%for event in project.event_set.all%}
+            {%if request.user.person in event.members.all%}
+            <li>-><a href="{{event.get_absolute_url}}">{{event}}</a></li>
+            {%endif%}
+            {%endfor%}
+        </ul>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No projects are available.</p>
+{% endif %}
+{% endblock %}

@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 class NewPersonForm(ModelForm):
     class Meta:
         model = Person
-        exclude =('user', 'events')
+        exclude =('user', 'projects')
 
 class NewPersonView(FormView):
     template_name = 'registration/person_create.html'
@@ -35,7 +35,7 @@ class NewPersonView(FormView):
     def get(self, request, user_id):
         self.user_id = user_id
         template = loader.get_template(self.template_name)
-        return HttpResponse(template.render({'user_id': user_id, 'form': NewPersonForm()}, request))
+        return HttpResponse(template.render({'user_id': user_id, 'form': NewPersonForm()}, request, ))
 
 
 class RegisterFormView(FormView):
@@ -52,16 +52,16 @@ class RegisterFormView(FormView):
 
 # Create your views here.
 
-
-class LoginFormView(FormView):
-# TODO: запилить кастомный логин, чтобы редиректило в личный кабинет
-    form_class = AuthenticationForm
-
-    template_name = "registration/login.html"
-    success_url = '/events'
-    def form_valid(self, form):
-        self.user = form.get_user()
-
-        login(self.request, self.user)
-        self.success_url = '/account/'+str(self.user.id)
-        return super(LoginFormView, self).form_valid(form)
+#
+# class LoginFormView(FormView):
+# # TODO: запилить кастомный логин, чтобы редиректило в личный кабинет
+#     form_class = AuthenticationForm
+#
+#     template_name = "registration/login.html"
+#     success_url = '/events'
+#     def form_valid(self, form):
+#         self.user = form.get_user()
+#
+#         login(self.request, self.user)
+#         self.success_url = '/account/'+str(self.user.id)
+#         return super(LoginFormView, self).form_valid(form)

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'event.apps.EventConfig',
+    'dashboard.apps.DashboardConfig'
 ]
 
 MIDDLEWARE = [
@@ -128,6 +129,7 @@ STATICFILES_DIRS = [
 
 
 LOGIN_URL = '/auth/login'
-LOGIN_REDIRECT_URL='/events/'
+LOGIN_REDIRECT_URL='/dashboard/'
+LOGOUT_REDIRECT_URL='/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
