@@ -1,12 +1,15 @@
 from django.views.generic import TemplateView
-from authenticate import requirements
+# from authenticate import requirements
+from django.urls import reverse
 from django.contrib.auth.mixins import UserPassesTestMixin
 
-class DashboardView(TemplateView,UserPassesTestMixin):
+class DashboardView(UserPassesTestMixin, TemplateView):
     template_name = "dashboard/dashboard.html"
-    login_url = '/account/new_person/'
-    def get_test_func(self):
-        return self.check
+    redirect_field_name = 'next'
+    raise_exception = False
 
-    def check(self):
+    def get_login_url(self):
+        return reverse('person_create')
+
+    def test_func(self):
         return hasattr(self.request.user, 'person')
