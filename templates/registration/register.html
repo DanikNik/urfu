@@ -1,9 +1,54 @@
-{%extends "base_generic.html"%}
+{%extends "registration/base.html"%}
 {%block title%}REGISTER{%endblock%}
-{%block content%}
-    <form action="" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">REGISTER</button>
-    </form>
-{%endblock%}}
+{% block registration %}
+{#    <form action="" method="post">#}
+{#      {% csrf_token %}#}
+{#      {{ form.as_p }}#}
+{#      <button type="submit">REGISTER</button>#}
+{#    </form>#}
+    <h1>Registration</h1>
+<form action="" method="post">
+{% csrf_token %}
+<div class="field">
+    <label  class="label" for="id_username">Username:</label>
+    <div class="control has-icons-left">
+    <input class="input" type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+        <span class="icon is-small is-left">
+      <i class="fas fa-user"></i>
+    </span>
+        <p class="help">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p>
+    </div>
+</div>
+    <div class="field">
+        <label class="label" for="id_password1">Password:</label>
+        <div class="control has-icons-left">
+            <input class="input" type="password" name="password1" required="" id="id_password1">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            <ul class="help">
+                <li>Your password can't be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can't be a commonly used password.</li>
+                <li>Your password can't be entirely numeric.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label" for="id_password2">Password confirmation:</label>
+        <div class="control has-icons-left">
+        <input class="input" type="password" name="password2" required="" id="id_password2">
+            <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+            </span>
+            <p class="help">Enter the same password as before, for verification.</p>
+        </div>
+    </div>
+
+</div>
+    <button class="button is-primary" type="submit">REGISTER</button>
+
+</form>
+{%endblock%}
+
+

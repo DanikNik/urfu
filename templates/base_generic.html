@@ -1,37 +1,98 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {%load static%}
-    <link rel="stylesheet" href="{%static "css/materialize.css"%}"/>
-
-    <title>{% block title %}URFU{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "css/bulma.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/app.css" %}"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <title>{% block title %}SoftSkilks{% endblock %}</title>
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            {%block sidebar%}
-            {%if user.is_authenticated%}
-                <ul id="nav-mobile" class="right">
-                    <li><a href="{%url 'register'%}">Register</a></li>
-                    <li><a href="{%url 'person_list'%}">Personal</a></li>
-                    <li><a href="{%url 'project_list'%}">Projects</a></li>
-                    <li><a href="{%url 'dashboard'%}">{{request.user.person}} UserID:{{request.user.id}}</a></li>
-                    <li><a class="waves-effect waves-light btn" href="{% url 'logout'%}">Logout</a></li>
-                </ul>
-            {%else%}
-                <ul id="nav-mobile" class="right">
-                    <li><a href="{%url 'register'%}">Register</a></li>
-                    <li><a class="waves-effect waves-light btn" href="{% url 'login'%}">Login</a></li>
-                </ul>
-            {%endif%}
-            {%endblock%}
+<nav class="navbar is-transparent is-dark">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <img src="{% static "img/logo.png" %}" alt="softskills">
+        </a>
+        <div class="navbar-burger burger" data-target="navbar-softskills">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-    </nav>
-
-    <div class="container">
-        {% block content %}{% endblock %}
     </div>
-<script type="text/javascript" src="{%static "js/materialize.js"%}"></script>   
+    <div id="navbar-softskills" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="https://bulma.io/">
+                Home
+            </a>
+            <a class="navbar-item" href="{% url 'register' %}">Register</a>
+            <a class="navbar-item" href="{% url 'person_list' %}">Personal</a>
+            <a class="navbar-item" href="{% url 'project_list' %}">Projects</a>
+            <a class="navbar-item" href="{% url 'dashboard' %}">{{ request.user.person }} UserID:{{ request.user.id }}</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="/documentation/overview/start/">
+                    Docs
+                </a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="/documentation/overview/start/">
+                        Overview
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                        Modifiers
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                        Columns
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                        Layout
+                    </a>
+                    <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                        Form
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+                        Elements
+                    </a>
+                    <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                        Components
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field is-grouped">
+                    {% if user.is_authenticated %}
+                        <p class="control">
+                            <a class="button is-primary" href="{% url 'logout' %}">
+                                <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                                <span>logout</span>
+                            </a>
+                        </p>
+                    {% else %}
+                        <p class="control">
+                            <a class="button is-light" href="{% url 'register' %}">
+                                <span class="icon"><i class="fas fa-key"></i></span>
+                                <span>Register</span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary" href="{% url 'login' %}">
+                                <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                                <span>login</span>
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

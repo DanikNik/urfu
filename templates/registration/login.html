@@ -1,6 +1,6 @@
-{% extends "base_generic.html" %}
+{% extends "registration/base.html" %}
 
-{% block content %}
+{% block registration %}
 
 
 
@@ -18,29 +18,35 @@
             <p>Please login to see this page.</p>
         {% endif %}
     {% endif %}
-    <div class="row">
-        <div class="card-panel col s6 offset-s3 m6 offset-m3">
+
             <h2>Login</h2>
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
-                <div class="input-field">
-                    {{ form.username.label_tag }}
-                    {{ form.username }}
+                <div class="field">
+                    <label class="label" for="id_username">Username:</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="text" name="username" maxlength="150" autofocus="" required="" id="id_username">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-user"></i>
+                        </span>
+                    </div>
                 </div>
-                <div class="input-field">
-                    {{ form.password.label_tag }}
-                    {{ form.password }}
+                <div class="field">
+                    <label class="label" for="id_password2">Password confirmation:</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="password" name="password" required="" id="id_password">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </div>
                 </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
 
-                <div class="input-field">
-                    <input class="btn" type="submit" value="login"/>
-                    <input type="hidden" name="next" value="{{ next }}"/>
-                </div>
+                <input class="button is-primary" type="submit" value="login"/>
+                <a class="button is-text" href="{% url 'password_reset' %}">Lost password?</a>
+
 
             </form>
 
-            {# Assumes you setup the password_reset view in your URLconf #}
-            <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-        </div>
-    </div>
+
 {% endblock %}
