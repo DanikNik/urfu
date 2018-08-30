@@ -1,8 +1,10 @@
-{%extends "base_generic.html"%}
+{% extends "account/base.html" %}
+
+
 
 {%block title%} User {%endblock title%}
 
-{%block content%}
+{%block account %}
 {%if person.user_id == request.user.id%}
     <h3>IT'S YOU</h3>
     <a class="waves-effect waves-light btn" href="{%url 'person_update'%}"> EditPersonal</a>
@@ -37,4 +39,4 @@
 <!--{% else %}-->
     <!--<p>No projects are available.</p>-->
 <!--{% endif %}-->
-{%endblock content%}
+{%endblock %}
