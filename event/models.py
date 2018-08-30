@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from account.models import Person
 from django.urls import reverse
 
@@ -10,6 +11,9 @@ class Project(models.Model):
     start_time = models.DateTimeField(null=True, blank=True)
     end_time = models.DateTimeField(null=True, blank=True)
     is_visible = models.BooleanField(default=0)
+
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    created_at_time = models.DateTimeField(null=True, blank=True)
 
     members = models.ManyToManyField(Person, through='ProjectMembership')
 
@@ -31,9 +35,13 @@ class Event(models.Model):
     end_time = models.DateTimeField(null=True, blank=True)
     is_required = models.BooleanField(default=0)
 
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    created_at_time = models.DateTimeField(null=True, blank=True)
+
     owner = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='owned_events')
-    members = models.ManyToManyField(Person, through='EventMembership')
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+    members = models.ManyToManyField(Person, through='EventMembership')
 
     class Meta:
         ordering = ["start_time"]

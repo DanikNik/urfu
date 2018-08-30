@@ -2,13 +2,13 @@
 
 {% block registration %}
 
-    <h1>{{request.user.id}}</h1>
+    <h1>UserID: {{request.user.id}}</h1>
 
-
+<h3>Add new Project</h3>
     <form action="" method="post">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">ADD PERSON</button>
+      <button type="submit">ADD PROJECT</button>
     </form>
 
 {%endblock%}

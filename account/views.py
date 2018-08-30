@@ -35,6 +35,7 @@ class PersonCreateView(CreateView):
         'type'
     ]
 
+
     # def handle_no_permission(self):
     #     pass
     #
