@@ -1,18 +1,16 @@
-from django.shortcuts import render
-from django.template import loader
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
-from django.http import HttpResponse
 from .models import Person
+from assets.checks.user_check_mixins import ProfileCheckMixin
 
-class PersonListView(ListView):
+class PersonListView(ProfileCheckMixin, ListView):
     model = Person
     template_name = 'account/person_list.html'
     context_object_name = 'person_list'
 
 # Create your views here.
 
-class PersonDetailView(DetailView):
+class PersonDetailView(ProfileCheckMixin, DetailView):
     model = Person
     template_name = 'account/person_detail.html'
     context_object_name = 'person'
@@ -37,13 +35,25 @@ class PersonCreateView(CreateView):
         'type'
     ]
 
+    # def handle_no_permission(self):
+    #     pass
+    #
+    # @property
+    # def test_func(self):
+    #     try:
+    #         Person.objects.get(user = self.request.user)
+    #         return False
+    #     except:
+    #         return True
+
+
     def form_valid(self, form):
         person = form.save(commit=False)
         person.user = self.request.user
         return super(PersonCreateView, self).form_valid(form)
 
 
-class PersonUpdateView(UpdateView):
+class PersonUpdateView(ProfileCheckMixin, UpdateView):
     model = Person
     fields = ['type']
     template_name = 'account/person_update.html'
