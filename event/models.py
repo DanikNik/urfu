@@ -36,7 +36,7 @@ class Event(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ["-start_time"]
+        ordering = ["start_time"]
 
     def __str__(self):
         return self.title + ' ' + '({})'.format('reqired' if self.is_required else 'not required')
