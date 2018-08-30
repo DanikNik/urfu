@@ -17,7 +17,7 @@ class NewPersonForm(ModelForm):
         model = Person
         exclude =('user', 'projects')
 
-class NewPersonView(FormView):
+class NewPersonView(FormView): # TODO: FormView -> CreateView
     template_name = 'registration/person_create.html'
 
     def __init__(self):

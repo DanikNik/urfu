@@ -1,7 +1,9 @@
 {% extends "base_generic.html" %}
 {% block title %} Dashboard {% endblock %}
 {% block content %}
-    <p>Dashboard for {{ request.user.person }}</p>
+<p>Dashboard for <a href="{{user.person.get_absolute_url}}"> {{ request.user.person }}</a></p>
+
+    <a class="waves-effect waves-light btn" href="{%url 'person_update'%}"> EditPersonal</a>
     {% if request.user.person.projects %}
     <ul>
     {% for project in request.user.person.projects.all %}
