@@ -1,8 +1,8 @@
-{%extends "base_generic.html"%}
+{% extends "project/base.html" %}
 
 {%block title%} Event {%endblock title%}
 
-{%block content%}
+{% block project %}
 <h1>{{event.title}}</h1>
 <p>Owner: <a href="{{event.owner.get_absolute_url}}">{{event.owner}}</a></p>
 {% if event.project.members %}
@@ -30,4 +30,4 @@
     </form>
     {%endif%}
 {%endif%}
-{%endblock content%}
+{%endblock %}

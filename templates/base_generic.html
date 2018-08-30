@@ -21,10 +21,17 @@
         </div>
     </div>
     <div id="navbar-softskills" class="navbar-menu">
+    {% if user.is_authenticated %}
         <div class="navbar-start">
             <a class="navbar-item" href="{% url 'person_list' %}">Personal</a>
-            <a class="navbar-item" href="{% url 'project_list' %}">Projects</a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="{% url 'project_list' %}">Projects</a>
+                <div class="navbar-dropdown is-boxed">
+                    <a class="navbar-item" href="/projects/add_project">+ Add Project</a>
+                </div>
+            </div>
         </div>
+    {% endif %}
 
         <div class="navbar-end">
             <div class="navbar-item">
