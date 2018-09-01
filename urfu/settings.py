@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'event.apps.EventConfig',
     'dashboard.apps.DashboardConfig',
-    'authenticate.apps.AuthenticateConfig'
+    'authenticate.apps.AuthenticateConfig',
+    'cockpit.apps.CockpitConfig'
 ]
 
 MIDDLEWARE = [

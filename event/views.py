@@ -1,11 +1,10 @@
 from django.urls import reverse
 from .models import Project, Event, ProjectMembership, EventMembership
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import FormMixin, CreateView
+from django.views.generic.edit import FormMixin
 from django import forms
 from assets.forms.fields import SubmitButtonField
-from assets.checks.user_check_mixins import ProfileCheckMixin, StaffCheckMixin
-from django.utils import timezone
+from assets.checks.user_check_mixins import ProfileCheckMixin
 
 class RegisterButtonForm(forms.Form):
     field = SubmitButtonField(initial="REGISTER", label='')
@@ -75,44 +74,3 @@ class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
         membership = EventMembership.add_member(self.request.user.person, self.object)
         membership.save()
         return super(EventDetailView, self).form_valid(form)
-
-class ProjectCreateView(StaffCheckMixin, CreateView):
-    model = Project
-    template_name = 'project/project_create.html'
-
-    fields = [
-        'title',
-        'description',
-        'icon',
-        'start_time',
-        'end_time',
-        'is_visible'
-    ]
-
-    def form_valid(self, form):
-        project = form.save(commit=False)
-        project.created_by = self.request.user
-        project.created_at_time = timezone.now()
-        project.save()
-        return super(ProjectCreateView, self).form_valid(form)
-#
-class EventCreateView(StaffCheckMixin, CreateView):
-    model = Event
-    template_name = 'project/event_create.html'
-
-    fields =[
-    'title',
-    'description',
-    'start_time',
-    'end_time',
-    'is_required',
-    'owner',
-    'project'
-    ]
-
-    def form_valid(self, form):
-        event = form.save(commit=False)
-        event.created_by = self.request.user
-        event.created_at_time = timezone.now()
-        event.save()
-        return super(EventCreateView, self).form_valid(form)
