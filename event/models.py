@@ -18,7 +18,7 @@ class Project(models.Model):
     members = models.ManyToManyField(Person, through='ProjectMembership')
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["start_time"]
 
     def __str__(self):
         return self.title

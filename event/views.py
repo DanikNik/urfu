@@ -41,7 +41,7 @@ class ProjectDetailView(ProfileCheckMixin, DetailView, FormMixin):
         project_membership = ProjectMembership.add_member(self.request.user.person, self.object)
         for event in self.object.event_set.all():
             if event.is_required:
-                event_membership = EventMembership.add_member(self.request.user.person, event, self.object)
+                event_membership = EventMembership.add_member(self.request.user.person, event, project_membership)
                 event_membership.save()
         project_membership.save()
         return super(ProjectDetailView, self).form_valid(form)
@@ -70,6 +70,9 @@ class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        membership = EventMembership.add_member(self.request.user.person, self.object)
+        membership = EventMembership.add_member(self.request.user.person,
+                                                self.object,
+                                                ProjectMembership.objects.get(person=self.request.user.person,
+                                                                              project=self.object.project))
         membership.save()
         return super(EventDetailView, self).form_valid(form)
