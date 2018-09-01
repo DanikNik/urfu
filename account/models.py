@@ -10,7 +10,9 @@ class Person(models.Model):
 
     name = models.CharField(max_length=200)
     surname = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200, blank=True)
+    # last_name = models.CharField(max_length=200, blank=True)
+
+    avatar = models.ImageField(null=True)
 
     place_of_study = models.CharField(max_length=200, blank=True)
     group_number = models.CharField(max_length=20, blank=True)

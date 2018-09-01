@@ -28,7 +28,10 @@
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="{% url 'project_list' %}">Projects</a>
                 <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item" href="/projects/add_project">+ Add Project</a>
+                    <a class="navbar-item" href="{% url 'project_create'%}">+ Add Project</a>
+                    <div class="navbar-dropdown is-boxed">
+                        <a class="navbar-item" href="{% url 'event_create'%}">+ Add Event</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,6 +41,7 @@
             <div class="navbar-item">
                 <div class="field is-grouped">
                     {% if user.is_authenticated %}
+                    {%if user.person%}
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link" href="{{user.person.get_absolute_url}}">{{ request.user.person }}</a>
 
@@ -52,6 +56,9 @@
                     </a>
                 </div>
             </div>
+                    {%else%}
+                    <a href="{%url 'logout'%}"> logout_href</a>
+                    {%endif%}
 
                     {% else %}
                         <p class="control">

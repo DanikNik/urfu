@@ -21,7 +21,7 @@ class PersonCreateView(CreateView):
     fields = [
         'name',
         'surname',
-        'last_name',
+        # 'last_name',
         'place_of_study',
         'group_number',
         'place_of_work',
@@ -61,7 +61,7 @@ class PersonUpdateView(ProfileCheckMixin, UpdateView):
     fields = [
         'name',
         'surname',
-        'last_name',
+        # 'last_name',
         'place_of_study',
         'group_number',
         'place_of_work',

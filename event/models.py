@@ -38,8 +38,8 @@ class Event(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     created_at_time = models.DateTimeField(null=True, blank=True)
 
-    owner = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='owned_events')
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    owner = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='owned_events', null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
 
     members = models.ManyToManyField(Person, through='EventMembership')
 
@@ -54,8 +54,8 @@ class Event(models.Model):
 
 
 class ProjectMembership(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.person) + ' / ' + str(self.project)
@@ -67,13 +67,14 @@ class ProjectMembership(models.Model):
 
 
 class EventMembership(models.Model):
-    person = models.ForeignKey('account.Person', on_delete=models.CASCADE)
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    person = models.ForeignKey('account.Person', on_delete=models.CASCADE, null=True)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
+    project_membership = models.ForeignKey(ProjectMembership, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.person) + ' / ' + str(self.event)
 
     @classmethod
-    def add_member(self, _person, _event):
-        membership = self.objects.create(person=_person, event=_event)
+    def add_member(self, _person, _event, _project_membership):
+        membership = self.objects.create(person=_person, event=_event, project_membership=_project_membership)
         return membership
