@@ -26,7 +26,7 @@ class ProjectDetailView(ProfileCheckMixin, DetailView, FormMixin):
     context_object_name = 'project'
     template_name = 'project/project_detail.html'
 
-    form_class = RegisterButtonForm
+    form_class = forms.Form
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.id})
@@ -45,13 +45,19 @@ class ProjectDetailView(ProfileCheckMixin, DetailView, FormMixin):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        project_membership = ProjectMembership.add_member(self.request.user.person, self.object)
-        for event in self.object.event_set.all():
-            if event.is_required:
-                event_membership = EventMembership.add_member(self.request.user.person, event, project_membership)
-                event_membership.save()
-        project_membership.save()
-        return super(ProjectDetailView, self).form_valid(form)
+        user_person = self.request.user.person
+        if user_person not in self.object.members.all():
+            project_membership = ProjectMembership.add_member(user_person, self.object)
+            for event in self.object.event_set.all():
+                if event.is_required:
+                    event_membership = EventMembership.add_member(user_person, event, project_membership)
+                    event_membership.save()
+            project_membership.save()
+            return super(ProjectDetailView, self).form_valid(form)
+        else:
+            membership_to_delete = ProjectMembership.objects.get(person=user_person, project=self.object)
+            membership_to_delete.delete()
+            return super(ProjectDetailView, self).form_valid(form)
 
 
 class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
@@ -59,7 +65,7 @@ class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
     context_object_name = "event"
     template_name = "project/event_detail.html"
 
-    form_class = RegisterButtonForm
+    form_class = forms.Form
 
     def get_success_url(self):
         return reverse('event_detail', kwargs={'pk': self.object.id})
@@ -78,9 +84,15 @@ class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        membership = EventMembership.add_member(self.request.user.person,
-                                                self.object,
-                                                ProjectMembership.objects.get(person=self.request.user.person,
-                                                                              project=self.object.project))
-        membership.save()
-        return super(EventDetailView, self).form_valid(form)
+        user_person = self.request.user.person
+        if user_person not in self.object.members.all():
+            membership = EventMembership.add_member(user_person,
+                                                    self.object,
+                                                    ProjectMembership.objects.get(person=user_person,
+                                                                                  project=self.object.project))
+            membership.save()
+            return super(EventDetailView, self).form_valid(form)
+        else:
+            membership_to_delete = EventMembership.objects.get(person=user_person, event=self.object)
+            membership_to_delete.delete()
+            return super(EventDetailView, self).form_valid(form)

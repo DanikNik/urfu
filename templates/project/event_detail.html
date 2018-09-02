@@ -1,33 +1,45 @@
 {% extends "project/base.html" %}
 
-{%block title%} Event {%endblock title%}
+{% block title %} Event {% endblock title %}
 
 {% block project %}
-<h1>{{event.title}}</h1>
-<p>Owner: <a href="{{event.owner.get_absolute_url}}">{{event.owner}}</a></p>
-{% if event.project.members %}
-    <h4>Members</h4>
-    <ul>
-        {% for person in event.members.all%}
-            <li><a href="{{person.get_absolute_url}}">{{person.name}} {{person.surname}}</a></li>
-        {% endfor %}
-    </ul>
-{%else%}
-    <p>No users</p>
-{%endif%}
+    <h1>{{ event.title }}</h1>
+    <p>Owner: <a href="{{ event.owner.get_absolute_url }}">{{ event.owner }}</a></p>
+    {% if event.project.members %}
+        <h4>Members</h4>
+        <ul>
+            {% for person in event.members.all %}
+                <li><a href="{{ person.get_absolute_url }}">{{ person.name }} {{ person.surname }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No users</p>
+    {% endif %}
 
-{%if event.is_required%}
-    {% if request.user.person in event.project.members.all%}
-        <h5>You are registered</h5>
-    {%endif%}
-{%else%}
-    {%if request.user.person in event.members.all%}
-        <h5>You are registered</h2>
-    {%else%}
-    <form action="" method="POST">
-        {%csrf_token%}
-        {{form.as_p}}
-    </form>
-    {%endif%}
-{%endif%}
-{%endblock %}
+    {% if event.is_required %}
+        {% if request.user.person in event.project.members.all %}
+            <h5>You are registered</h5>
+        {% endif %}
+    {% else %}
+        {% if request.user.person in event.members.all %}
+            <h5>You are registered</h5>
+            <form action="" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Leave</button>
+                </div>
+            </div>
+        </form>
+        {% else %}
+            <form action="" method="POST">
+            {% csrf_token %}
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary" type="submit">Register</button>
+                </div>
+            </div>
+        </form>
+        {% endif %}
+    {% endif %}
+{% endblock %}
