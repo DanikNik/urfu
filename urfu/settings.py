@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
 ]
 
 
-LOGIN_URL = '/auth/login'
+LOGIN_URL = '/account/login'
 LOGIN_REDIRECT_URL='/dashboard/'
 LOGOUT_REDIRECT_URL='/'
 

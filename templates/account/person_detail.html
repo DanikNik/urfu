@@ -7,7 +7,6 @@
 {%block account %}
 {%if person.user_id == request.user.id%}
     <h3>IT'S YOU</h3>
-    <a class="waves-effect waves-light btn" href="{%url 'person_update'%}"> EditPersonal</a>
 {%endif%}
 <h1>{{person.name}} {{person.surname}}</h1>
 <p>USER_ID: {{person.user.id}}</p>
