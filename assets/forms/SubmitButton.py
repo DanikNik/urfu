@@ -1,6 +1,7 @@
 from django import forms
 from django.utils import html
 
+
 class SubmitButtonWidget(forms.Widget):
     def render(self, name, value, attrs=None, **kwargs):
         return '<input type="submit" name="%s" value="%s">' % (html.escape(name), html.escape(value))

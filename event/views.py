@@ -3,16 +3,23 @@ from .models import Project, Event, ProjectMembership, EventMembership
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import FormMixin
 from django import forms
-from assets.forms.fields import SubmitButtonField
+from assets.forms.SubmitButton import SubmitButtonField
 from assets.checks.user_check_mixins import ProfileCheckMixin
+
 
 class RegisterButtonForm(forms.Form):
     field = SubmitButtonField(initial="REGISTER", label='')
+
+
+class LeaveButtonForm(forms.Form):
+    field = SubmitButtonField(initial="Leave", label='')
+
 
 class ProjectListView(ProfileCheckMixin, ListView):
     model = Project
     context_object_name = "project_list"
     template_name = 'project/project_list.html'
+
 
 class ProjectDetailView(ProfileCheckMixin, DetailView, FormMixin):
     model = Project
@@ -45,6 +52,7 @@ class ProjectDetailView(ProfileCheckMixin, DetailView, FormMixin):
                 event_membership.save()
         project_membership.save()
         return super(ProjectDetailView, self).form_valid(form)
+
 
 class EventDetailView(ProfileCheckMixin, DetailView, FormMixin):
     model = Event

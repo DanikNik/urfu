@@ -1,0 +1,50 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+    <h1>{{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+    {% if project.members %}
+        <h3>Members</h3>
+        <ul>
+            {% for person in project.members.all %}
+                <li><a href="{{ person.get_absolute_url }}"> {{ person }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <p></p>
+    <h3>Events related</h3>
+    {% if project.event_set.all %}
+        <ul>
+            {% for event in project.event_set.all %}
+                <li><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No events in project</p>
+    {% endif %}
+
+    {% if request.user.person in project.members.all %}
+        <h5>You are registered</h5>
+    {% else %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+    {% endif %}
+
+
+    <form class="register" method="POST" action="{% url 'person_detail' %}">
+        {% csrf_token %}
+        {{ forms.register.as_p }}
+
+        <button name='action' value='register' type="submit">Register</button>
+    </form>
+
+    <form class="leave" method="POST" action="{% url 'person_detail' %}">
+        {% csrf_token %}
+        {{ forms.leave.as_p }}
+
+        <button name='action' value='leave' type="submit">Leave</button>
+    </form>
+{% endblock %}

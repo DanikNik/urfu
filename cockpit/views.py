@@ -1,12 +1,14 @@
 from django.views.generic.edit import CreateView
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 from assets.checks.user_check_mixins import StaffCheckMixin
 from event.models import Project, Event
 from django.utils import timezone
 
 
-class CockpitIndexView(TemplateView):
-    pass #TODO: add cockpit interface (list of possible operations)
+class CockpitIndexView(ListView):
+    template_name = 'cockpit/index.html'
+    context_object_name = 'project_list'
+    model = Project
 
 class ProjectCreateView(StaffCheckMixin, CreateView):
     model = Project

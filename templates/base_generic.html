@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static "css/bulma-extensions.min.css" %}"/>
     <link rel="stylesheet" href="{% static "css/app.css" %}"/>
     <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
-    <title>{% block title %}SoftSkilks{% endblock %}</title>
+    <title>{% block title %}SoftSkills{% endblock %}</title>
 </head>
 
 <body>
@@ -22,43 +22,44 @@
         </div>
     </div>
     <div id="navbar-softskills" class="navbar-menu">
-    {% if user.is_authenticated %}
-        <div class="navbar-start">
-            <a class="navbar-item" href="{% url 'person_list' %}">Personal</a>
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="{% url 'project_list' %}">Projects</a>
-                <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item" href="{% url 'project_create'%}">+ Add Project</a>
+        {% if user.is_authenticated %}
+            <div class="navbar-start">
+                <a class="navbar-item" href="{% url 'person_list' %}">Personal</a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link" href="{% url 'project_list' %}">Projects</a>
                     <div class="navbar-dropdown is-boxed">
-                        <a class="navbar-item" href="{% url 'event_create'%}">+ Add Event</a>
+                        <a class="navbar-item" href="{% url 'project_create' %}">+ Add Project</a>
+                        <div class="navbar-dropdown is-boxed">
+                            <a class="navbar-item" href="{% url 'event_create' %}">+ Add Event</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    {% endif %}
+        {% endif %}
 
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="field is-grouped">
                     {% if user.is_authenticated %}
-                    {%if user.person%}
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="{{user.person.get_absolute_url}}">{{ request.user.person }}</a>
+                        {% if user.person %}
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <a class="navbar-link"
+                                   href="{{ user.person.get_absolute_url }}">{{ request.user.person }}</a>
 
-                <div class="navbar-dropdown is-boxed">
-                    <a class="navbar-item" href="{% url 'dashboard' %}">Dashboard</a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="{%url 'person_update'%}">Edit Profile</a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="{% url 'logout' %}">
-                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                                <span>logout</span>
-                    </a>
-                </div>
-            </div>
-                    {%else%}
-                    <a href="{%url 'logout'%}"> logout_href</a>
-                    {%endif%}
+                                <div class="navbar-dropdown is-boxed">
+                                    <a class="navbar-item" href="{% url 'dashboard' %}">Dashboard</a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item" href="{% url 'person_update' %}">Edit Profile</a>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item" href="{% url 'logout' %}">
+                                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                                        <span>logout</span>
+                                    </a>
+                                </div>
+                            </div>
+                        {% else %}
+                            <a href="{% url 'logout' %}"> logout_href</a>
+                        {% endif %}
 
                     {% else %}
                         <p class="control">
@@ -82,7 +83,7 @@
 
 
 
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 </body>
 </html>
