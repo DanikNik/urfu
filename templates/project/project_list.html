@@ -1,19 +1,19 @@
 {% extends "project/base.html" %}
 
-{%block title%} Event {%endblock title%}
+{% block title %} Event {% endblock title %}
 
 {% block project %}
 
-<h1>PROJECT LIST</h1>
-{% if project_list %}
-    <ul>
-    {% for project in project_list %}
-        {%if project.is_visible%}
-        <li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>
-        {%endif%}
-    {% endfor %}
-    </ul>
-{% else %}
-    <h5>No projects are available.</h5>
-{% endif %}
-{%endblock %}
+    <h1>PROJECT LIST</h1>
+    {% if project_list %}
+        <ul>
+            {% for project in project_list %}
+                {% if project.is_visible %}
+                    <li><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h5>No projects are available.</h5>
+    {% endif %}
+{% endblock %}

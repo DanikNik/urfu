@@ -1,32 +1,36 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-   <h1>Cockpit</h1>
+    <h1>Cockpit</h1>
 
     <table border="1">
-    <tr>
-        <th>Project</th>
-        <th>Events</th>
-        <th>Members</th>
-    </tr>
-        {% for project in project_list%}
+        <tr>
+            <th>Project</th>
+            <th>Events</th>
+            <th>Members</th>
+        </tr>
+        {% for project in project_list %}
             <tr>
-            <td>{{ project }}</td>
+                <td>{{ project }}</td>
                 <td>
                     <table>
-                    {% for event in project.event_set.all %}
-                        <tr><td>{{ event }}</td></tr>
-                    {% endfor %}
+                        {% for event in project.event_set.all %}
+                            <tr>
+                                <td>{{ event }}</td>
+                            </tr>
+                        {% endfor %}
                     </table>
                 </td>
                 <td>
                     <table>
-                    {% for event in project.event_set.all %}
-                        {% for person in event.members.all %}
-                            <tr><td>{{ person }}</td></tr>
-                        {% endfor %}
+                        {% for event in project.event_set.all %}
+                            {% for person in event.members.all %}
+                                <tr>
+                                    <td>{{ person }}</td>
+                                </tr>
+                            {% endfor %}
 
-                    {% endfor %}
+                        {% endfor %}
                     </table>
                 </td>
             </tr>

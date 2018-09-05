@@ -24,22 +24,26 @@
         {% if request.user.person in event.members.all %}
             <h5>You are registered</h5>
             <form action="" method="POST">
-            {% csrf_token %}
-            <div class="field">
-                <div class="control">
-                    <button class="button is-primary" type="submit">Leave</button>
+                {% csrf_token %}
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Leave</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
         {% else %}
             <form action="" method="POST">
-            {% csrf_token %}
-            <div class="field">
-                <div class="control">
-                    <button class="button is-primary" type="submit">Register</button>
+                {% csrf_token %}
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Register</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
         {% endif %}
     {% endif %}
+
+    {% for file in event.eventfile_set.all %}
+        <li>{{ file.title }}</li>
+    {% endfor %}
 {% endblock %}

@@ -3,10 +3,12 @@ from django.views.generic.edit import CreateView, UpdateView
 from .models import Person
 from assets.checks.user_check_mixins import ProfileCheckMixin
 
+
 class PersonListView(ProfileCheckMixin, ListView):
     model = Person
     template_name = 'account/person_list.html'
     context_object_name = 'person_list'
+
 
 # Create your views here.
 
@@ -14,6 +16,7 @@ class PersonDetailView(ProfileCheckMixin, DetailView):
     model = Person
     template_name = 'account/person_detail.html'
     context_object_name = 'person'
+
 
 class PersonCreateView(CreateView):
     model = Person
@@ -34,19 +37,6 @@ class PersonCreateView(CreateView):
         'phone_number',
         'type'
     ]
-
-
-    # def handle_no_permission(self):
-    #     pass
-    #
-    # @property
-    # def test_func(self):
-    #     try:
-    #         Person.objects.get(user = self.request.user)
-    #         return False
-    #     except:
-    #         return True
-
 
     def form_valid(self, form):
         person = form.save(commit=False)
@@ -77,4 +67,3 @@ class PersonUpdateView(ProfileCheckMixin, UpdateView):
 
     def get_object(self):
         return self.request.user.person
-

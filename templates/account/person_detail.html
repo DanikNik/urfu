@@ -2,40 +2,40 @@
 
 
 
-{%block title%} User {%endblock title%}
+{% block title %} User {% endblock title %}
 
-{%block account %}
-{%if person.user_id == request.user.id%}
-    <h3>IT'S YOU</h3>
-{%endif%}
-<h1>{{person.name}} {{person.surname}}</h1>
-<p>USER_ID: {{person.user.id}}</p>
-<p>{{person.user.email}}</p>
+{% block account %}
+    {% if person.user_id == request.user.id %}
+        <h3>IT'S YOU</h3>
+    {% endif %}
+    <h1>{{ person.name }} {{ person.surname }}</h1>
+    <p>USER_ID: {{ person.user.id }}</p>
+    <p>{{ person.user.email }}</p>
 
-<p>{{person.type}}</p>
-{%if person.place_of_study%}<p>Place of study: {{person.place_of_study}}</p>{%endif%}
-{%if person.group%}<p>Group_number{{person.group_number}}</p>{%endif%}
-{%if person.place_of_work%}<p>{{person.place_of_work}}</p>{%endif%}
-{%if person.job_position%}<p>{{person.job_position}}</p>{%endif%}
-{%if person.birth_date%}<p>{{person.birth_date}}</p>{%endif%}
-{%if person.vk_link%}<p>{{person.vk_link}}</p>{%endif%}
-{%if person.fb_link%}<p>{{person.fb_link}}</p>{%endif%}
-{%if person.google.link%}<p>{{person.google_link}}</p>{%endif%}
-{%if person.tg_link%}<p>{{person.tg_link}}</p>{%endif%}
-{%if person.phone_number%}<p>{{person.phone_number}}</p>{%endif%}
+    <p>{{ person.type }}</p>
+    {% if person.place_of_study %}<p>Place of study: {{ person.place_of_study }}</p>{% endif %}
+    {% if person.group %}<p>Group_number{{ person.group_number }}</p>{% endif %}
+    {% if person.place_of_work %}<p>{{ person.place_of_work }}</p>{% endif %}
+    {% if person.job_position %}<p>{{ person.job_position }}</p>{% endif %}
+    {% if person.birth_date %}<p>{{ person.birth_date }}</p>{% endif %}
+    {% if person.vk_link %}<p>{{ person.vk_link }}</p>{% endif %}
+    {% if person.fb_link %}<p>{{ person.fb_link }}</p>{% endif %}
+    {% if person.google.link %}<p>{{ person.google_link }}</p>{% endif %}
+    {% if person.tg_link %}<p>{{ person.tg_link }}</p>{% endif %}
+    {% if person.phone_number %}<p>{{ person.phone_number }}</p>{% endif %}
 
-<!--{% if person.projects %}-->
-    <!--<ul>-->
-    <!--{% for project in person.projects.all %}-->
-        <!--<li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>-->
+    <!--{% if person.projects %}-->
         <!--<ul>-->
+        <!--{% for project in person.projects.all %}-->
+            <!--<li><a href="{{project.get_absolute_url}}">{{ project.title }}</a></li>-->
+            <!--<ul>-->
             <!--{%for event in project.event_set.all%}-->
-            <!--<li>-><a href="{{event.get_absolute_url}}">{{event}}</a></li>-->
-            <!--{%endfor%}-->
+                <!--<li>-><a href="{{event.get_absolute_url}}">{{event}}</a></li>-->
+                <!--{%endfor%}-->
+            <!--</ul>-->
+            <!--{% endfor %}-->
         <!--</ul>-->
-    <!--{% endfor %}-->
-    <!--</ul>-->
-<!--{% else %}-->
-    <!--<p>No projects are available.</p>-->
-<!--{% endif %}-->
-{%endblock %}
+        <!--{% else %}-->
+        <!--<p>No projects are available.</p>-->
+        <!--{% endif %}-->
+{% endblock %}

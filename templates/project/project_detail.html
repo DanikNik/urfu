@@ -47,4 +47,9 @@
             </div>
         </form>
     {% endif %}
+    <ul>
+    {% for file in project.projectfile_set.all %}
+        <li>{{ file.title }}</li>
+    {% endfor %}
+    </ul>
 {% endblock %}

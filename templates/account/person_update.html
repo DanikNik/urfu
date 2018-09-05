@@ -1,24 +1,74 @@
 {% extends "account/base.html" %}
 
-{%block account %}
-<form method="post">
-    {% csrf_token %}
-{#    {{ form.as_p }}#}
-    <div class="field"><label class="label" for="id_name">Name:</label> <input class="input" type="text" name="name" maxlength="200" required="" id="id_name"></div>
-<div class="field"><label class="label" for="id_surname">Surname:</label> <input class="input" type="text" name="surname"  maxlength="200" required="" id="id_surname"></div>
-<div class="field"><label class="label" for="id_last_name">Last name:</label> <input class="input" type="text" name="last_name" maxlength="200" id="id_last_name"></div>
-<div class="field"><label class="label" for="id_place_of_study">Place of study:</label> <input class="input" type="text" name="place_of_study" maxlength="200" id="id_place_of_study"></div>
-<div class="field"><label class="label" for="id_group_number">Group number:</label> <input class="input" type="text" name="group_number" maxlength="20" id="id_group_number"></div>
-<div class="field"><label class="label" for="id_place_of_work">Place of work:</label> <input class="input" type="text" name="place_of_work" maxlength="200" id="id_place_of_work"></div>
-<div class="field"><label class="label" for="id_job_position">Job position:</label> <input class="input" type="text" name="job_position" maxlength="50" id="id_job_position"></div>
-<div class="field"><label class="label" for="id_birth_date">Birth date:</label> <input class="input" type="text" name="birth_date" required="" id="id_birth_date"></div>
-<div class="field"><label class="label" for="id_vk_link">Vk link:</label> <input class="input" type="url" name="vk_link" maxlength="200" id="id_vk_link"></div>
-<div class="field"><label class="label" for="id_fb_link">Fb link:</label> <input class="input" type="url" name="fb_link" maxlength="200" id="id_fb_link"></div>
-<div class="field"><label class="label" for="id_google_link">Google link:</label> <input class="input" type="url" name="google_link" maxlength="200" id="id_google_link"></div>
-<div class="field"><label class="label" for="id_tg_link">Tg link:</label> <input class="input" type="url" name="tg_link" maxlength="200" id="id_tg_link"></div>
-<div class="field"><label class="label" for="id_phone_number">Phone number:</label> <input class="input" type="text" name="phone_number" maxlength="20" id="id_phone_number"></div>
-<div class="field"><label class="label" for="id_type">Type:</label> <input class="input" type="text" name="type" re" maxlength="200" required="" id="id_type"></div>
+{% block account %}
+    <form method="post">
+        {% csrf_token %}
+        {#    {{ form.as_p }}#}
+        <div class="field"><label class="label" for="id_name">Name:</label> <input class="input" type="text" name="name"
+                                                                                   maxlength="200" required=""
+                                                                                   id="id_name"></div>
+        <div class="field"><label class="label" for="id_surname">Surname:</label> <input class="input" type="text"
+                                                                                         name="surname" maxlength="200"
+                                                                                         required="" id="id_surname">
+        </div>
+        <div class="field"><label class="label" for="id_last_name">Last name:</label> <input class="input" type="text"
+                                                                                             name="last_name"
+                                                                                             maxlength="200"
+                                                                                             id="id_last_name"></div>
+        <div class="field"><label class="label" for="id_place_of_study">Place of study:</label> <input class="input"
+                                                                                                       type="text"
+                                                                                                       name="place_of_study"
+                                                                                                       maxlength="200"
+                                                                                                       id="id_place_of_study">
+        </div>
+        <div class="field"><label class="label" for="id_group_number">Group number:</label> <input class="input"
+                                                                                                   type="text"
+                                                                                                   name="group_number"
+                                                                                                   maxlength="20"
+                                                                                                   id="id_group_number">
+        </div>
+        <div class="field"><label class="label" for="id_place_of_work">Place of work:</label> <input class="input"
+                                                                                                     type="text"
+                                                                                                     name="place_of_work"
+                                                                                                     maxlength="200"
+                                                                                                     id="id_place_of_work">
+        </div>
+        <div class="field"><label class="label" for="id_job_position">Job position:</label> <input class="input"
+                                                                                                   type="text"
+                                                                                                   name="job_position"
+                                                                                                   maxlength="50"
+                                                                                                   id="id_job_position">
+        </div>
+        <div class="field"><label class="label" for="id_birth_date">Birth date:</label> <input class="input" type="text"
+                                                                                               name="birth_date"
+                                                                                               required=""
+                                                                                               id="id_birth_date"></div>
+        <div class="field"><label class="label" for="id_vk_link">Vk link:</label> <input class="input" type="url"
+                                                                                         name="vk_link" maxlength="200"
+                                                                                         id="id_vk_link"></div>
+        <div class="field"><label class="label" for="id_fb_link">Fb link:</label> <input class="input" type="url"
+                                                                                         name="fb_link" maxlength="200"
+                                                                                         id="id_fb_link"></div>
+        <div class="field"><label class="label" for="id_google_link">Google link:</label> <input class="input"
+                                                                                                 type="url"
+                                                                                                 name="google_link"
+                                                                                                 maxlength="200"
+                                                                                                 id="id_google_link">
+        </div>
+        <div class="field"><label class="label" for="id_tg_link">Tg link:</label> <input class="input" type="url"
+                                                                                         name="tg_link" maxlength="200"
+                                                                                         id="id_tg_link"></div>
+        <div class="field"><label class="label" for="id_phone_number">Phone number:</label> <input class="input"
+                                                                                                   type="text"
+                                                                                                   name="phone_number"
+                                                                                                   maxlength="20"
+                                                                                                   id="id_phone_number">
+        </div>
+        <div class="field"><label class="label" for="id_type">Type:</label> <input class="input" type="text" name="type"
+                                                                                   re" maxlength="200" required=""
+            id="id_type">
+        </div>
 
-    <input class="button is-primary" type="submit">
-</form>
-{%endblock%}
+        <input class="button is-primary" type="submit">
+    </form>
+{% endblock %}

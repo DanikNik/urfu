@@ -27,6 +27,32 @@ class Project(models.Model):
         return reverse('project_detail', args=[self.id])
 
 
+class ProjectMembership(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str(self.person) + ' / ' + str(self.project)
+
+    @classmethod
+    def add_member(self, _person, _project):
+        membership = self.objects.create(person=_person, project=_project)
+        return membership
+
+
+def project_upload(instance, filename):
+    return 'projects/project_{}/{}'.format(instance.id, filename)
+
+
+class ProjectFile(models.Model):
+    project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=project_upload)
+    title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title
+
+
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
@@ -52,19 +78,6 @@ class Event(models.Model):
         return reverse('event_detail', args=[self.id])
 
 
-class ProjectMembership(models.Model):
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=True)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
-
-    def __str__(self):
-        return str(self.person) + ' / ' + str(self.project)
-
-    @classmethod
-    def add_member(self, _person, _project):
-        membership = self.objects.create(person=_person, project=_project)
-        return membership
-
-
 class EventMembership(models.Model):
     person = models.ForeignKey('account.Person', on_delete=models.CASCADE, null=True)
     event = models.ForeignKey(Event, on_delete=models.CASCADE, null=True)
@@ -77,3 +90,16 @@ class EventMembership(models.Model):
     def add_member(self, _person, _event, _project_membership):
         membership = self.objects.create(person=_person, event=_event, project_membership=_project_membership)
         return membership
+
+
+def event_upload(instance, filename):
+    return 'events/event_{}/{}'.format(instance.id, filename)
+
+
+class EventFile(models.Model):
+    event = models.ForeignKey(Event, null=True, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=event_upload)
+    title = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.title

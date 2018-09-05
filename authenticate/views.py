@@ -4,24 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from django.views.generic import View
 
-
-from django.forms import ModelForm
-from account.models import Person
-from django.contrib.auth.models import User
-
-class NewPersonForm(ModelForm):
-    class Meta:
-        model = Person
-        exclude =('user', 'projects')
-
-from django.contrib.auth.decorators import user_passes_test
-def person_assigned(user):
-    try:
-        assert user.person
-        return True
-    except:
-        return False
-#
+'''New person view was moved to account app'''
 # class NewPersonView(CreateView):
 #     model = Person
 #     template_name = 'registration/person_create.html'
@@ -77,7 +60,7 @@ class RegisterFormView(FormView):
         self.user = form.save()
         print(self.user)
         login(self.request, self.user)
-        self.success_url = "/auth/login/?next=/account/new_person/"
+        self.success_url = "/account/login/?next=/account/new_person/"
         return super(RegisterFormView, self).form_valid(form)
 
 # Create your views here.
