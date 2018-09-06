@@ -41,13 +41,21 @@ class ProjectMembership(models.Model):
 
 
 def project_upload(instance, filename):
-    return 'projects/project_{}/{}'.format(instance.id, filename)
+    return 'projects/project_{}/{}'.format(instance.project.id, filename)
 
 
 class ProjectFile(models.Model):
     project = models.ForeignKey(Project, null=True, on_delete=models.CASCADE)
     file = models.FileField(upload_to=project_upload)
     title = models.CharField(max_length=200)
+
+    def delete(self, *args, **kwargs):
+        # You have to prepare what you need before delete the model
+        storage, path = self.file.storage, self.file.path
+        # Delete the model before the file
+        super(ProjectFile, self).delete(*args, **kwargs)
+        # Delete the file after the model
+        storage.delete(path)
 
     def __str__(self):
         return self.title
@@ -93,13 +101,21 @@ class EventMembership(models.Model):
 
 
 def event_upload(instance, filename):
-    return 'events/event_{}/{}'.format(instance.id, filename)
+    return 'events/event_{}/{}'.format(instance.event.id, filename)
 
 
 class EventFile(models.Model):
     event = models.ForeignKey(Event, null=True, on_delete=models.CASCADE)
     file = models.FileField(upload_to=event_upload)
     title = models.CharField(max_length=200)
+
+    def delete(self, *args, **kwargs):
+        # You have to prepare what you need before delete the model
+        storage, path = self.event.storage, self.event.path
+        # Delete the model before the file
+        super(EventFile, self).delete(*args, **kwargs)
+        # Delete the file after the model
+        storage.delete(path)
 
     def __str__(self):
         return self.title

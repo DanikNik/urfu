@@ -47,9 +47,10 @@
             </div>
         </form>
     {% endif %}
+    <h1>FILES</h1>
     <ul>
     {% for file in project.projectfile_set.all %}
-        <li>{{ file.title }}</li>
+        <li><a href="{{ file.file.url }}">{{ file.title }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
